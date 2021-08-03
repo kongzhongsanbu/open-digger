@@ -1,0 +1,15 @@
+pageTitle: OpenDigger Test Study Report
+contentTitle: OpenDigger Test Study Report
+sqls:
+  - overview
+weight:
+  issueCommentWeight: 1
+  openIssueWeight: 2
+  openPullWeight: 3
+  pullReviewWeight: 4
+  mergePullWeight: 2
+baseUrl: http://gar2020.opensource-service.cn/
+owner: X-lab2017
+repo: open-digger
+year: 2020
+table: github_log.year2020

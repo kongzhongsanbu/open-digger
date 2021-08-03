@@ -3,10 +3,12 @@ import { existsSync, readdirSync, readFileSync, renameSync, writeFileSync } from
 import { join } from 'path';
 import { caseStudy } from './case-study';
 import { globalStudy } from './global-study';
+import { testStudy } from './test-study';
 
 (async () => {
   await globalStudy();
   await caseStudy();
+  await testStudy();
 
   const runType = process.env.RUN_TYPE;
   if (runType === 'test') {

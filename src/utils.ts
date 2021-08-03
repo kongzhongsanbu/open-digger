@@ -51,7 +51,7 @@ export async function generateReport(config: GenerateReportConfig): Promise<stri
   }
 
   const sqls = config.sqls || config.customConfig.sqls || readdirSync(config.sqlsDir);
-  let html = '', css = '', js = '';
+  let html = '', css = '', jsx = '', js = '';
   for (const s of sqls) {
     const dirPath = join(config.sqlsDir, s);
     if (!lstatSync(dirPath).isDirectory()) {
@@ -69,19 +69,21 @@ export async function generateReport(config: GenerateReportConfig): Promise<stri
     let sqlConfig = readFileAsObj(jsonConfigFile) || readFileAsObj(yamlConfigFile) || {};
 
     const processorFunc = requireFromString(readFileSync(processFile).toString());
-    const postResult: { html: string; css: string; js: string; } = await processorFunc({
+    const postResult: { html: string; css: string; jsx: string; js: string; } = await processorFunc({
       ...sqlConfig,
       ...config.customConfig,
     }, pageUtils);
 
     html += postResult.html;
     css += postResult.css;
+    jsx += postResult.jsx;
     js += postResult.js;
   }
 
   const studyContent = pope(templateContent, {
     html,
     css,
+    jsx,
     js,
     ...globalConfig.general,
     ...config.customConfig,
